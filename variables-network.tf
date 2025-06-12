@@ -1,25 +1,4 @@
-# Network/firewall variables
+# Network variables for MongoDB Cluster
 
-variable "public_network_access_enabled" {
-  description = "Whether the MongoDB Cluster is available from public network."
-  type        = bool
-  default     = false
-}
-
-variable "network_bypass" {
-  description = "Specify whether traffic is bypassed for 'Logging', 'Metrics', 'AzureServices' or 'None'."
-  type        = list(string)
-  default     = ["Logging", "Metrics", "AzureServices"]
-}
-
-variable "allowed_cidrs" {
-  description = "List of allowed CIDR ranges to access the MongoDB Cluster resource."
-  type        = list(string)
-  default     = []
-}
-
-variable "allowed_subnet_ids" {
-  description = "List of allowed subnets IDs to access the MongoDB Cluster resource."
-  type        = list(string)
-  default     = []
-}
+# Note: MongoDB Cluster has limited network configuration options
+# The main network control is through public_network_access which is already defined in variables-mongo-cluster.tf
