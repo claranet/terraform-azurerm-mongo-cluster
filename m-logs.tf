@@ -1,8 +1,8 @@
 module "diagnostics" {
   source  = "claranet/diagnostic-settings/azurerm"
-  # version = "~> 8.0"
+  version = "~> 8.0"
 
-  resource_id = azurerm_mongo_cluster.main.id
+  resource_id = local.mongo_cluster_resource.id
 
   logs_destinations_ids = var.logs_destinations_ids
   log_categories        = var.logs_categories
