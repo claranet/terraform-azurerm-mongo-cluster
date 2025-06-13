@@ -46,14 +46,14 @@ module "mongo_cluster" {
   environment = var.environment
   stack       = var.stack
 
-  administrator_username = "claranet"
-  shard_count            = "1"
-  compute_tier           = "Free"
-  high_availability_mode = "Disabled"
-  storage_size_in_gb     = "32"
-  mongodb_version        = "7.0"
+  administrator_username    = "claranet"
+  shard_count               = 1
+  compute_tier              = "Free"
+  high_availability_enabled = false
+  storage_size_in_gb        = 32
+  mongodb_version           = "7.0"
 
-  public_network_access = "Enabled"
+  public_network_access_enabled = false
 
   logs_destinations_ids = [
     module.run.logs_storage_account_id,
@@ -81,7 +81,7 @@ module "mongo_cluster_replica" {
   source_server_id = module.mongo_cluster.id
   source_location  = module.azure_region.location
 
-  public_network_access = "Enabled"
+  public_network_access_enabled = false
 
   logs_destinations_ids = [
     module.run.logs_storage_account_id,
@@ -99,7 +99,7 @@ module "mongo_cluster_replica" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.2.29 |
-| azurerm | >= 4.23 |
+| azurerm | ~> 4.23 |
 | random | >= 2.0 |
 
 ## Modules
@@ -131,7 +131,7 @@ module "mongo_cluster_replica" {
 | diagnostic\_settings\_custom\_name | Custom name of the diagnostics settings, name will be `default` if not set. | `string` | `"default"` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Additional tags to add on resources. | `map(string)` | `{}` | no |
-| high\_availability\_mode | The high availability mode for the MongoDB Cluster. Possible values are Disabled and ZoneRedundantPreferred. Note: High availability is only available for M30 tier and above. | `string` | `"Disabled"` | no |
+| high\_availability\_enabled | Whether the high availability is disabled or enabled (ZoneRedundantPreferred). Note: High availability is only available for M30 tier and above. | `bool` | `false` | no |
 | location | Azure region to use. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
@@ -141,13 +141,13 @@ module "mongo_cluster_replica" {
 | name\_prefix | Optional prefix for the generated name. | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
 | preview\_features | The preview features that can be enabled on the MongoDB Cluster. | `list(string)` | `[]` | no |
-| public\_network\_access | The Public Network Access setting for the MongoDB Cluster. Possible values are Disabled and Enabled. | `string` | `"Enabled"` | no |
+| public\_network\_access\_enabled | Whether the MongoDB Cluster is available from public network. | `bool` | `false` | no |
 | resource\_group\_name | Name of the resource group. | `string` | n/a | yes |
-| shard\_count | The Number of shards to provision on the MongoDB Cluster. | `string` | `"1"` | no |
+| shard\_count | The Number of shards to provision on the MongoDB Cluster. | `number` | `1` | no |
 | source\_location | The location of the source MongoDB Cluster. Required when create\_mode is GeoReplica. | `string` | `null` | no |
 | source\_server\_id | The ID of the replication source MongoDB Cluster. Required when create\_mode is GeoReplica. | `string` | `null` | no |
 | stack | Project stack name. | `string` | n/a | yes |
-| storage\_size\_in\_gb | The size of the data disk space for the MongoDB Cluster. | `string` | `"32"` | no |
+| storage\_size\_in\_gb | The size of the data disk space for the MongoDB Cluster. Valid values are: 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768. Note: Free tier only supports 32 GiB, M10/M20/M25 tiers support 32, 64, or 128 GiB only, M30+ tiers support all values. | `number` | `32` | no |
 
 ## Outputs
 

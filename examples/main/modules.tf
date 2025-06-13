@@ -10,14 +10,14 @@ module "mongo_cluster" {
   environment = var.environment
   stack       = var.stack
 
-  administrator_username = "claranet"
-  shard_count            = "1"
-  compute_tier           = "Free"
-  high_availability_mode = "Disabled"
-  storage_size_in_gb     = "32"
-  mongodb_version        = "7.0"
+  administrator_username    = "claranet"
+  shard_count               = 1
+  compute_tier              = "Free"
+  high_availability_enabled = false
+  storage_size_in_gb        = 32
+  mongodb_version           = "7.0"
 
-  public_network_access = "Enabled"
+  public_network_access_enabled = false
 
   logs_destinations_ids = [
     module.run.logs_storage_account_id,
@@ -45,7 +45,7 @@ module "mongo_cluster_replica" {
   source_server_id = module.mongo_cluster.id
   source_location  = module.azure_region.location
 
-  public_network_access = "Enabled"
+  public_network_access_enabled = false
 
   logs_destinations_ids = [
     module.run.logs_storage_account_id,

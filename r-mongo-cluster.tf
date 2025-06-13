@@ -6,7 +6,7 @@ resource "random_password" "administrator_password" {
   upper            = true
   lower            = true
   numeric          = true
-  override_special = "!$#%&*()-_=+[]{}<>:?"
+  override_special = "!#$%^&*()-_=+"
 }
 
 # MongoDB Cluster for Default mode (read-write)
@@ -27,7 +27,7 @@ resource "azurerm_mongo_cluster" "main" {
   version                = var.mongodb_version
   preview_features       = var.preview_features
 
-  public_network_access = var.public_network_access
+  public_network_access = var.public_network_access_enabled ? "Enabled" : "Disabled"
 
   tags = merge(local.default_tags, var.extra_tags)
 }
@@ -44,11 +44,16 @@ resource "azurerm_mongo_cluster" "replica" {
   source_server_id = var.source_server_id
   source_location  = var.source_location
 
-  public_network_access = var.public_network_access
+  public_network_access = var.public_network_access_enabled ? "Enabled" : "Disabled"
 
   tags = merge(local.default_tags, var.extra_tags)
 
   lifecycle {
+    precondition {
+      condition     = local.geo_replica_sources_provided
+      error_message = "Both `source_server_id` and `source_location` must be set when `create_mode` is 'GeoReplica'."
+    }
+
     ignore_changes = [
       administrator_username,
       high_availability_mode,
