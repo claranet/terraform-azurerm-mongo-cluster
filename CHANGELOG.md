@@ -1,3 +1,13 @@
+## 8.1.0 (2025-06-20)
+
+### Features
+
+* **AZ-1577:** modify connection string output ca1df7e
+
+### Miscellaneous Chores
+
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.1 1d8bd7b
+
 ## 8.0.0 (2025-06-13)
 
 ### ⚠ BREAKING CHANGES
