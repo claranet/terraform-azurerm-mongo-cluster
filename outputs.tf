@@ -13,9 +13,16 @@ output "name" {
   value       = local.mongo_cluster_resource.name
 }
 
-output "connection_strings" {
-  description = "The list of connection strings for the MongoDB Cluster."
-  value       = local.mongo_cluster_resource.connection_strings
+output "global_readwrite_connection_string" {
+  description = "The Global ReadWrite connection string for the MongoDB Cluster."
+  value       = try([for cs in local.mongo_cluster_resource.connection_strings : cs.value if cs.name == "GlobalReadWrite"][0], "")
+  sensitive   = true
+}
+
+output "self_connection_string" {
+  description = "The Self connection string for the MongoDB Cluster."
+  value       = try([for cs in local.mongo_cluster_resource.connection_strings : cs.value if cs.name == "Self"][0], "")
+  sensitive   = true
 }
 
 output "administrator_login" {

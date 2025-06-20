@@ -155,10 +155,11 @@ module "mongo_cluster_replica" {
 |------|-------------|
 | administrator\_login | The administrator login for the MongoDB Cluster. |
 | administrator\_password | The administrator password for the MongoDB Cluster. |
-| connection\_strings | The list of connection strings for the MongoDB Cluster. |
+| global\_readwrite\_connection\_string | The Global ReadWrite connection string for the MongoDB Cluster. |
 | id | MongoDB Cluster ID. |
 | name | MongoDB Cluster name. |
 | resource | MongoDB Cluster resource object. |
+| self\_connection\_string | The Self connection string for the MongoDB Cluster. |
 <!-- END_TF_DOCS -->
 
 ## Related documentation
