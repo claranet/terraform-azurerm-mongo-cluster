@@ -98,7 +98,7 @@ module "mongo_cluster_replica" {
 
 | Name | Version |
 |------|---------|
-| azurecaf | ~> 1.2.29 |
+| azurecaf | >= 1.2.28 |
 | azurerm | ~> 4.31 |
 | random | >= 2.0 |
 
