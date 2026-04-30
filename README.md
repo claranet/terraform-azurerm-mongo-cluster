@@ -97,7 +97,7 @@ module "mongo_cluster_replica" {
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | azurecaf | >= 1.2.28 |
 | azurerm | ~> 4.31 |
 | random | >= 2.0 |
@@ -105,13 +105,13 @@ module "mongo_cluster_replica" {
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | diagnostics | claranet/diagnostic-settings/azurerm | ~> 8.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_mongo_cluster.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mongo_cluster) | resource |
 | [azurerm_mongo_cluster.replica](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mongo_cluster) | resource |
 | [random_password.administrator_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
@@ -120,7 +120,7 @@ module "mongo_cluster_replica" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | administrator\_password | The Password associated with the administrator\_username for the MongoDB Cluster. If not set, password is randomly generated. | `string` | `null` | no |
 | administrator\_username | The administrator username of the MongoDB Cluster. | `string` | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
@@ -152,7 +152,7 @@ module "mongo_cluster_replica" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | administrator\_login | The administrator login for the MongoDB Cluster. |
 | administrator\_password | The administrator password for the MongoDB Cluster. |
 | global\_readwrite\_connection\_string | The Global ReadWrite connection string for the MongoDB Cluster. |
