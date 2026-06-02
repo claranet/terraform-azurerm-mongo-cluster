@@ -1,6 +1,7 @@
 output "resource" {
   description = "MongoDB Cluster resource object."
   value       = local.mongo_cluster_resource
+  sensitive   = true
 }
 
 output "id" {
